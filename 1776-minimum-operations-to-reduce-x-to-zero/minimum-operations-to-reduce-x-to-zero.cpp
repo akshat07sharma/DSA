@@ -1,38 +1,38 @@
 class Solution {
 public:
     int minOperations(vector<int>& nums, int x) {
-
         int sum = 0;
-        for (int i = 0; i < nums.size(); i++) {
-            sum += nums[i];
+        for(int i = 0;i<nums.size();i++){
+            sum+= nums[i];
         }
-        if (x > sum)
-            return -1;
-
-        int req = sum - x;
-
-        int i = 0, j = 0;
-        int currSum = 0;
+        if(x>sum ) return -1;
+        int req = sum-x;
+        
+        int i = 0;
+        int j = 0;
         int maxi = -1;
+        sum = 0;
+        while(j<nums.size()){
+            sum+= nums[j];
 
-        while (j < nums.size()) {
-            currSum += nums[j];
-
-            while (currSum > req) {
-                currSum -= nums[i];
+            while(sum>req){
+                sum-= nums[i];
                 i++;
             }
-
-            if (currSum == req) {
-                maxi = max(maxi, j - i + 1);
+            if(sum == req){
+                int count = j-i+1;
+                maxi = max(maxi,count);
             }
-
             j++;
-        }
-        int ans = nums.size() - maxi;
-        if (maxi == -1)
-            return -1;
 
-        return ans;
+        }
+             if(maxi == -1) return -1;
+
+
+
+        return  nums.size()- maxi;
+       
+
+    
     }
 };
